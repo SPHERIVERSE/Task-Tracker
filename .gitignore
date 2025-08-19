@@ -1,0 +1,49 @@
+# ---- Global ----
+.DS_Store
+Thumbs.db
+*.log
+logs/
+*.out
+*.err
+*.pid
+
+# ---- Python (Backend) ----
+backend/__pycache__/
+backend/*.pyc
+backend/*.pyo
+backend/*.pyd
+backend/*.db
+backend/*.sqlite3
+backend/.env
+backend/.venv/
+backend/env/
+backend/venv/
+backend/instance/
+backend/.mypy_cache/
+backend/.pytest_cache/
+backend/coverage/
+backend/htmlcov/
+
+# ---- Node.js (Frontend) ----
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+frontend/*.local
+frontend/.vite/
+frontend/*.tsbuildinfo
+
+# ---- Docker ----
+# keep Dockerfile(s) + docker-compose.yml
+*.seed
+*.dump
+*.sql
+
+# ---- IDEs/Editors ----
+.vscode/
+.idea/
+*.swp
+*.swo

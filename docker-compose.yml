@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    container_name: tasktracker_db
+    restart: always
+    environment:
+      POSTGRES_USER: task_user
+      POSTGRES_PASSWORD: taskpass
+      POSTGRES_DB: task_tracker_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d  # ✅ init scripts
+
+
+  backend:
+    build: ./backend
+    container_name: tasktracker_backend
+    restart: always
+    environment:
+      FLASK_APP: app.py
+      FLASK_ENV: development
+      DATABASE_URL: postgresql://task_user:taskpass@db:5432/task_tracker_db
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    container_name: tasktracker_frontend
+    restart: always
+    environment:
+      VITE_API_BASE: http://backend:5000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  db_data:
+
